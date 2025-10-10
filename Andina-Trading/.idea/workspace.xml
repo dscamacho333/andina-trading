@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c06c157e-fee0-4093-8d06-b1aef6e08ab0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/microservice-config/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/microservice-config/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-config/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +30,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.MicroserviceConfigApplication.executor": "Run",
     "git-widget-placeholder": "AT-42-Configuración-archivo-.env-del-proyecto",
@@ -89,7 +92,7 @@
       <workItem from="1760072844420" duration="3000" />
       <workItem from="1760073072246" duration="739000" />
       <workItem from="1760073899084" duration="49000" />
-      <workItem from="1760132178421" duration="1138000" />
+      <workItem from="1760132178421" duration="1625000" />
     </task>
     <servers />
   </component>

@@ -7,6 +7,10 @@
 /dataSources/
 /dataSources.local.xml
 
-# Ignorar .env global y cualquier .env secundario
+# Archivos de entorno (en cualquier módulo/carpeta)
+.env
+.env.*
+*.env
 **/.env
 **/.env.*
+**/*.env
