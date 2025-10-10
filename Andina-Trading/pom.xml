@@ -22,7 +22,7 @@
 
 
   <modules>
-
+    <module>microservice-config</module>
   </modules>
 
 
