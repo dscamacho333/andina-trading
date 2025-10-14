@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+
+spring:
+  application:
+    name: msvc-gateway
+
+
+  # Activate API Gateway
+  cloud:
+    gateway:
+
+
+      discovery:
+        locator:
+          enabled: true
+
+
+      server:
+        webmvc:
+
+
+          # Define routes for api gateway
+
+
+          routes:
+
+            # Here should be each microservice routes
+
+
+eureka:
+  client:
+    register-with-eureka: false
