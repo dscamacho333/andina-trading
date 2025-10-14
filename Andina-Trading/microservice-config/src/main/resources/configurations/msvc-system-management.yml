@@ -1,0 +1,23 @@
+server:
+  port: ${MS_SYSTEM_MANAGEMENT_PORT}
+
+spring:
+  application:
+    name: msvc-system-management
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${MS_SYSTEM_MANAGEMENT_DATASOURCE_URL}
+    username: ${MS_SYSTEM_MANAGEMENT_USERNAME}
+    password: ${MS_SYSTEM_MANAGEMENT_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+eureka:
+  instance:
+    hostname: ${MS_EUREKA_SERVER_HOSTNAME}
+  client:
+    service-url:
+      defaultZone: ${MS_EUREKA_SERVER_DEFAULT_ZONE}
