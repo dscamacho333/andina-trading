@@ -1,0 +1,3 @@
+CREATE DATABASE system_management_microservice;
+
+USE system_management_microservice;
