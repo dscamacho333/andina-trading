@@ -22,11 +22,13 @@ spring:
 
           # Define routes for api gateway
 
-
           routes:
 
             # Here should be each microservice routes
-
+            - id: system-management
+              uri: http://localhost:8090
+              predicates:
+                - Path=/api/v1/country/**
 
 eureka:
   client:
