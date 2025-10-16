@@ -22,8 +22,12 @@ public class City {
             strategy = GenerationType.IDENTITY
     )
     private Integer id;
+
+    @Column(name = "name")
     private String name;
-    private boolean isActive;
+
+    @Column(name = "is_active", insertable = false)
+    private boolean isActive = true;
 
     @ManyToOne
     @JoinColumn(

@@ -25,7 +25,7 @@ public class CountryUpdateDTO {
             message = "Country Code Must be only 2 characters long"
     )
     @Pattern(
-            regexp = "^[A-Za-z]{3,50}$",
+            regexp = "^[A-Za-zÁÉÍÓÚáéíóúÑñ\\s]{3,50}$",
             message = "Country Name Must contain letter only"
     )
     private String name;

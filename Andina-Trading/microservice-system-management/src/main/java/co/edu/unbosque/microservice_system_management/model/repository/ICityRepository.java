@@ -62,7 +62,7 @@ public interface ICityRepository extends JpaRepository<City, Integer> {
             FROM
             	CITY c
             INNER JOIN
-            	ECONOMY_SITUATION ec ON c.id = ec.id
+            	ECONOMY_SITUATION ec ON c.economy_situation_id = ec.id
             WHERE
             	c.is_active = True AND ec.name = :economySituation;
             """,
