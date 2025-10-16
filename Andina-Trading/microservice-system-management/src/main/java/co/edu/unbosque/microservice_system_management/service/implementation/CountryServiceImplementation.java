@@ -70,6 +70,7 @@ public class CountryServiceImplementation implements ICountryService {
                 );
 
         country.setId(countryId);
+        country.setActive(true);
 
         country = this.countryRepository
                 .save(country);
@@ -102,7 +103,7 @@ public class CountryServiceImplementation implements ICountryService {
         List<CountryResponseDTO> countriesResponseDTO = countries
                 .stream()
                 .map(
-                        (country) -> modelMapper
+                        (country) -> this.modelMapper
                                 .map(
                                         country,
                                         CountryResponseDTO.class

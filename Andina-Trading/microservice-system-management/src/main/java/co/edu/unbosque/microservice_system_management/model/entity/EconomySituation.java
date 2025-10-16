@@ -29,7 +29,7 @@ public class EconomySituation {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "is_active")
+    @Column(name = "is_active", insertable = false)
     private boolean isActive;
 
 

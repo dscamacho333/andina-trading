@@ -21,7 +21,7 @@ public interface ICityService {
             CityUpdateDTO cityUpdateDTO
     );
 
-    Void deleteCityById(
+    void deleteCityById(
             Integer cityId
     );
 

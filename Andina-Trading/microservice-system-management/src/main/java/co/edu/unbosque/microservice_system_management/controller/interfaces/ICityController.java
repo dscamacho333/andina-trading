@@ -36,7 +36,7 @@ public interface ICityController {
     @GetMapping
     ResponseEntity<List<CityResponseDTO>> findAllActiveCities();
 
-    @GetMapping("/{economySituation}")
+    @GetMapping("/situation/{economySituation}")
     ResponseEntity<List<CityResponseDTO>> findAllCitiesByEconomySituation(
             @PathVariable String economySituation
     );
