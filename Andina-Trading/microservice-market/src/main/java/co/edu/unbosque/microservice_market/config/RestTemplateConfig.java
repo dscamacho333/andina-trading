@@ -12,10 +12,10 @@ import java.util.Base64;
 @Configuration
 public class RestTemplateConfig {
 
-    @Value("${alpaca.broker.api.key}")
+    @Value("${alpaca.broker.api-key-id}")
     private String brokerKey;
 
-    @Value("${alpaca.broker.api.secret}")
+    @Value("${alpaca.broker.api-secret}")
     private String brokerSecret;
 
     @Bean("brokerRestTemplate")
@@ -30,8 +30,8 @@ public class RestTemplateConfig {
 
     @Bean("marketRestTemplate")
     public RestTemplate marketRestTemplate(RestTemplateBuilder builder,
-                                           @Value("${alpaca.market.api.key}") String marketKey,
-                                           @Value("${alpaca.market.api.secret}") String marketSecret) {
+                                           @Value("${alpaca.market.api-key-id}") String marketKey,
+                                           @Value("${alpaca.market.api-secret-key}") String marketSecret) {
         return builder
                 .defaultHeader("APCA-API-KEY-ID", marketKey)
                 .defaultHeader("APCA-API-SECRET-KEY", marketSecret)
