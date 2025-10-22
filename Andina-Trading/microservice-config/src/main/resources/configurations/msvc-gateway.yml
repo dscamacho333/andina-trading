@@ -23,6 +23,11 @@ spring:
               uri: http://localhost:8090
               predicates:
                 - Path=/api/v1/country/**,/api/v1/city/**,/api/v1/economy-situation/**
+            # Here should be each microservice routes
+            - id: market
+              uri: http://localhost:8001
+              predicates:
+                - Path=/api/stocks
 
       globalcors:
         corsConfigurations:
