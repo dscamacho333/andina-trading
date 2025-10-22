@@ -1,0 +1,29 @@
+:root{
+  --bg:#0f0f23;
+  --bg-2:#13132b;
+  --card:#141433;
+  --card-2:#0e0e26;
+  --text:#f3f3f7;
+  --muted:#a7a7c7;
+  --border:#24244a;
+  --border-2:#2e2e58;
+  --accent:#3b82f6;
+  --accent-2:#2563eb;
+  --danger:#e4505a;
+  --ok:#22c55e;
+  --shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+*{ box-sizing:border-box; }
+html, body, #root { height:100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, Helvetica, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:radial-gradient(1200px 600px at 20% -10%, #1b1b3f 0, transparent 55%), 
+             radial-gradient(900px 500px at 110% 20%, #1a1a3b 0, transparent 50%),
+             var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+a{ color:#a78bfa; text-decoration:none; }
+a:hover{ text-decoration:underline; }

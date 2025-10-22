@@ -37,3 +37,43 @@ CREATE TABLE CITY(
     FOREIGN KEY (economy_situation_id) REFERENCES ECONOMY_SITUATION(id)
     
 );
+
+CREATE TABLE SECTOR(
+
+	id INTEGER NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    
+    PRIMARY KEY (id)
+    
+);
+
+CREATE TABLE INDUSTRY(
+
+	id INTEGER NOT NULL AUTO_INCREMENT,
+    sector_id INTEGER NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    
+    PRIMARY KEY (id),
+    FOREIGN KEY (sector_id) REFERENCES SECTOR(id)
+    
+);
+
+
+CREATE TABLE ISSUER (
+
+  id  INTEGER AUTO_INCREMENT,
+  name VARCHAR(120) NOT NULL UNIQUE,
+  ticker VARCHAR(10) NOT NULL UNIQUE,                
+  country_id INTEGER NOT NULL,
+  industry_id INTEGER NOT NULL,                
+  website VARCHAR(200),
+  notes VARCHAR(500) NOT NULL,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  
+  PRIMARY KEY (id),
+  FOREIGN KEY (country_id) REFERENCES COUNTRY(id),
+  FOREIGN KEY (industry_id) REFERENCES INDUSTRY(id)
+  
+);

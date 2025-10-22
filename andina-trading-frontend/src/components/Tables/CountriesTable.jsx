@@ -1,109 +1,64 @@
-import { Table, Th, Td } from '../UI/Table';
-import { Button } from '../UI/Button';
-import { styles } from '../../styles/styles';
+import { useState, useEffect } from "react";
 
-export const CountriesTable = ({ 
-  countries, 
-  onEdit,
-  onSaveEdit,
-  onCancelEdit,
-  onDelete,
-  editingCountry,
-  editTempData,
-  onEditTempChange
-}) => {
+export function CountriesTable({
+  countries=[],
+  onEdit, onSaveEdit, onCancelEdit, onDelete,
+  editingCountry, editTempData, onEditTempChange,
+}) {
+  const [local, setLocal] = useState(editTempData || {});
+  useEffect(()=>{ setLocal(editTempData || {}); }, [editTempData, editingCountry]);
+
+  if (!countries.length) return <div className="subtitle">No hay países.</div>;
+
   return (
-    <div style={styles.tableSection}>
-      <div style={styles.sectionHeader}>
-        <h2 style={styles.sectionTitle}>Lista de Países</h2>
-        <span style={styles.countBadge}>{countries.length} países</span>
-      </div>
-      
-      <div style={styles.tableContainer}>
-        <Table>
-          <thead>
-            <tr>
-              <Th>ID</Th>
-              <Th>Código</Th>
-              <Th>Nombre</Th>
-              <Th>Acciones</Th>
-            </tr>
-          </thead>
-          <tbody>
-            {countries.map((country) => (
-              <tr key={country.id}>
-                {editingCountry === country.id ? (
+    <table className="table-dark">
+      <thead>
+        <tr>
+          <th style={{width:80}}>ID</th>
+          <th style={{width:140}}>Código</th>
+          <th>Nombre</th>
+          <th style={{width:200}}>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {countries.map(p => {
+          const editing = editingCountry === p.id;
+          return (
+            <tr key={p.id}>
+              <td>{p.id}</td>
+              <td>
+                {editing ? (
+                  <input
+                    value={local.code ?? p.code ?? ""}
+                    onChange={(e)=>{ setLocal(s=>({ ...s, code:e.target.value })); onEditTempChange?.('code', e.target.value); }}
+                  />
+                ) : <span>{p.code}</span>}
+              </td>
+              <td>
+                {editing ? (
+                  <input
+                    value={local.name ?? p.name ?? ""}
+                    onChange={(e)=>{ setLocal(s=>({ ...s, name:e.target.value })); onEditTempChange?.('name', e.target.value); }}
+                  />
+                ) : <strong>{p.name}</strong>}
+              </td>
+              <td className="cell-actions">
+                {editing ? (
                   <>
-                    <Td>{country.id}</Td>
-                    <Td>
-                      <input
-                        type="text"
-                        name="code"
-                        value={editTempData?.code || ''}
-                        onChange={(e) => onEditTempChange('code', e.target.value.toUpperCase())}
-                        style={styles.editInput}
-                        maxLength={2}
-                      />
-                    </Td>
-                    <Td>
-                      <input
-                        type="text"
-                        name="name"
-                        value={editTempData?.name || ''}
-                        onChange={(e) => onEditTempChange('name', e.target.value)}
-                        style={styles.editInput}
-                      />
-                    </Td>
-                    <Td>
-                      <Button
-                        onClick={() => onSaveEdit(country.id)}
-                        variant="primary"
-                        style={{ marginRight: '8px', fontSize: '12px', padding: '8px 16px' }}
-                      >
-                        Guardar
-                      </Button>
-                      <Button
-                        onClick={onCancelEdit}
-                        variant="cancel"
-                        style={{ fontSize: '12px', padding: '8px 16px' }}
-                      >
-                        Cancelar
-                      </Button>
-                    </Td>
+                    <button className="btn btn-ghost" type="button" onClick={()=>onSaveEdit?.(p.id)}>Guardar</button>
+                    <button className="btn btn-danger" type="button" onClick={onCancelEdit}>Cancelar</button>
                   </>
                 ) : (
                   <>
-                    <Td>{country.id}</Td>
-                    <Td>{country.code}</Td>
-                    <Td>{country.name}</Td>
-                    <Td>
-                      <Button
-                        onClick={() => onEdit(country)}
-                        variant="warning"
-                        style={{ marginRight: '8px', fontSize: '12px', padding: '8px 16px' }}
-                      >
-                        Editar
-                      </Button>
-                      <Button
-                        onClick={() => onDelete(country.id, country.name)}
-                        variant="danger"
-                        style={{ fontSize: '12px', padding: '8px 16px' }}
-                      >
-                        Eliminar
-                      </Button>
-                    </Td>
+                    <button className="btn btn-ghost" type="button" onClick={()=>onEdit?.(p)}>Editar</button>
+                    <button className="btn btn-danger" type="button" onClick={()=>onDelete?.(p.id, p.name)}>Eliminar</button>
                   </>
                 )}
-              </tr>
-            ))}
-            {countries.length === 0 && (
-              <tr>
-                <Td colSpan={4} style={styles.noData}>No hay países registrados</Td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-      </div>
-    </div>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
-};
+}

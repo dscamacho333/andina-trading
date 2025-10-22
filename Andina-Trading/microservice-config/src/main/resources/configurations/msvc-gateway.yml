@@ -20,15 +20,15 @@ spring:
           routes:
             # Here should be each microservice routes
             - id: system-management
-              uri: http://localhost:8090
+              uri: http://localhost:8050
               predicates:
-                - Path=/api/v1/country/**,/api/v1/city/**,/api/v1/economy-situation/**
+                - Path=/api/v1/country/**,/api/v1/city/**,/api/v1/economy-situation/**,/api/v1/sector/**,/api/v1/industry/**,/api/v1/issuer/**
 
       globalcors:
         corsConfigurations:
           "[/**]":
             allowedOrigins:
-              - http://localhost:5173
+              - http://localhost:5174
             allowedMethods: "*"
             allowedHeaders: "*"
             allowCredentials: true
