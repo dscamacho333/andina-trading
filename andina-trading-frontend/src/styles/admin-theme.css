@@ -1,0 +1,143 @@
+/* ====== SCOPE: Catálogos (Países & Ciudades) ====== */
+.admin-catalog .layout{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+.admin-catalog .header{
+  padding:24px 20px 8px;
+}
+.admin-catalog .brand{
+  max-width:1200px;
+  margin:0 auto;
+  text-align:center;        /* ✅ centrado SOLO aquí */
+}
+.admin-catalog .brand h1{
+  margin:0;
+  font-size:32px;
+  font-weight:800;
+  letter-spacing:.2px;
+}
+.admin-catalog .brand small{
+  display:block;
+  color:var(--muted);
+  font-weight:500;
+  margin-top:6px;
+}
+
+.admin-catalog .content{
+  flex:1;
+  display:flex;
+  padding:24px 20px 48px;
+}
+.admin-catalog .container{
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.admin-catalog .panel{
+  background:linear-gradient(180deg, rgba(255,255,255,.03), transparent 30%) , var(--bg-2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+/* headers de sección */
+.admin-catalog .section-header{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin:6px 0 14px;
+}
+.admin-catalog .section-title{ display:flex; flex-direction:column; gap:6px; }
+.admin-catalog .title{ font-size:20px; font-weight:700; margin:0; }
+.admin-catalog .subtitle{ color:var(--muted); font-size:13px; }
+
+/* controles */
+.admin-catalog .controls{
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:flex-end;
+}
+.admin-catalog .btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:10px; padding:8px 12px; font-weight:600; cursor:pointer;
+  border:1px solid transparent; transition:.15s ease;
+}
+.admin-catalog .btn-primary{ background:var(--accent); border-color:var(--accent-2); color:#fff; }
+.admin-catalog .btn-primary:hover{ filter:brightness(1.08); }
+.admin-catalog .btn-ghost{ background:transparent; color:#cfd2ff; border:1px solid var(--border-2); }
+.admin-catalog .btn-ghost:hover{ background:#1a1a38; }
+.admin-catalog .btn-danger{ background:var(--danger); color:#fff; border-color:#aa3841; }
+.admin-catalog .btn-danger:hover{ filter:brightness(1.07); }
+.admin-catalog .btn-chips{ padding:6px 10px; border-radius:8px; font-size:12px; }
+
+/* selects */
+.admin-catalog .select{
+  background:var(--card-2);
+  color:var(--text);
+  border:1px solid var(--border-2);
+  border-radius:10px;
+  padding:8px 10px;
+  min-width:200px;
+  width:auto;
+}
+.admin-catalog .select-compact{           /* ✅ más corto para “Situación” */
+  min-width:160px;
+  max-width:220px;
+}
+
+/* cards/forms */
+.admin-catalog .card{
+  background:var(--card);
+  border:1px solid var(--border-2);
+  border-radius:14px;
+  padding:16px;
+}
+.admin-catalog .form{ display:grid; gap:14px; }
+.admin-catalog .form-row{ display:grid; gap:6px; }
+.admin-catalog label{ font-weight:600; font-size:13px; }
+.admin-catalog input, 
+.admin-catalog textarea, 
+.admin-catalog select{
+  width:100%;
+  background:var(--card-2);
+  color:var(--text);
+  border:1px solid var(--border-2);
+  border-radius:10px;
+  padding:10px 12px;
+  outline:none;
+}
+.admin-catalog textarea{ resize:vertical; min-height:90px; }
+.admin-catalog .form-actions{ display:flex; justify-content:flex-end; gap:10px; }
+
+/* tablas oscuras SOLO aquí */
+.admin-catalog .table-wrap{ overflow:auto; }
+.admin-catalog .table-dark{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  background:var(--card-2);
+  border:1px solid var(--border-2);
+  border-radius:12px; overflow:hidden;
+}
+.admin-catalog .table-dark thead th{
+  background:#17173a; color:#eaeafb; text-align:left;
+  padding:12px; font-size:13px; letter-spacing:.2px;
+}
+.admin-catalog .table-dark td{
+  padding:12px; border-top:1px solid #20204a; color:#e6e6f4;
+}
+.admin-catalog .table-dark tr:hover td{ background:#14143a; }
+.admin-catalog .cell-actions{ display:flex; gap:8px; }
+
+/* contadores */
+.admin-catalog .kpi{
+  background:#16163c; color:#d8d8ff; padding:6px 10px;
+  border-radius:10px; font-size:12px; border:1px solid var(--border-2);
+}
+
+/* responsive */
+@media (max-width: 720px){
+  .admin-catalog .controls{ justify-content:stretch; }
+  .admin-catalog .select,
+  .admin-catalog .select-compact{ width:100%; min-width:unset; }
+}

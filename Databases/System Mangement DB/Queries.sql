@@ -64,3 +64,101 @@ FROM
 	ECONOMY_SITUATION es
 WHERE
 	es.is_active = True;
+    
+# Find All Active Sectors
+
+SELECT
+	s.id,
+    s.name,
+    s.is_active
+FROM
+	SECTOR s
+WHERE
+	s.is_active = True;
+
+# Find All Active Industries
+
+SELECT
+	i.id,
+    i.sector_id,
+    i.name,
+    i.is_active
+FROM
+	INDUSTRY i
+WHERE
+	i.is_active = True;
+    
+# Delete Issuer By ID
+
+UPDATE 
+	ISSUER i
+SET
+	i.is_active = False
+WHERE
+	i.id = 8;
+
+# Find All Active Issuers
+
+SELECT
+	i.id,
+	i.name,
+	i.ticker,                
+	i.country_id,
+	i.industry_id,                
+	i.website,
+	i.notes,
+	i.is_active
+FROM
+	ISSUER i
+WHERE
+	i.is_active = True;
+    
+# Find All Issuers By Country
+
+SELECT
+	i.id,
+	i.name,
+	i.ticker,                
+	i.country_id,
+	i.industry_id,                
+	i.website,
+	i.notes,
+	i.is_active
+FROM
+	ISSUER i
+WHERE
+	i.is_active = True AND i.country_id = 1;
+
+# Find All Issuers By Industry
+
+SELECT
+	i.id,
+	i.name,
+	i.ticker,                
+	i.country_id,
+	i.industry_id,                
+	i.website,
+	i.notes,
+	i.is_active
+FROM
+	ISSUER i
+WHERE
+	i.is_active = True AND i.industry_id = 1;
+
+# Find All Issuers By Sector
+
+SELECT
+	i.id,
+	i.name,
+	i.ticker,                
+	i.country_id,
+	i.industry_id,                
+	i.website,
+	i.notes,
+	i.is_active
+FROM
+	ISSUER i
+INNER JOIN
+	INDUSTRY ind ON i.industry_id = ind.id
+WHERE
+	i.is_active = True AND ind.sector_id = 1;

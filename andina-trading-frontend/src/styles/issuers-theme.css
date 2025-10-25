@@ -1,0 +1,147 @@
+/* ====== SCOPE: Emisores (no afecta otras páginas) ====== */
+.admin-issuers{
+  --bg:#0f0f23;
+  --bg-2:#13132b;
+  --card:#141433;
+  --card-2:#0e0e26;
+  --text:#f3f3f7;
+  --muted:#a7a7c7;
+  --border:#24244a;
+  --border-2:#2e2e58;
+  --accent:#658CFF;        /* azul suave como en Catálogos */
+  --accent-2:#3d62f0;
+  --danger:#e4505a;
+  --danger-2:#c63f48;
+  --shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+/* ===== Layout centrado (match con Catálogos) ===== */
+.admin-issuers .layout{ min-height:100vh; display:flex; flex-direction:column; }
+.admin-issuers .header{ padding:24px 20px 8px; }
+.admin-issuers .brand{
+  max-width:1200px; margin:0 auto; text-align:center;
+}
+.admin-issuers .brand h1{
+  margin:0; font-size:32px; font-weight:900; letter-spacing:.2px;
+}
+.admin-issuers .brand small{
+  display:block; color:var(--muted); font-weight:500; margin-top:6px;
+}
+.admin-issuers .content{ flex:1; display:flex; padding:24px 20px 48px; }
+.admin-issuers .container{ width:100%; max-width:1200px; margin:0 auto; }
+
+/* ===== Panel ===== */
+.admin-issuers .panel{
+  background:linear-gradient(180deg, rgba(255,255,255,.03), transparent 30%), var(--bg-2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:22px;
+}
+
+/* Título y subtítulo internos */
+.admin-issuers .block-title{ font-size:20px; font-weight:800; margin:0 0 8px; }
+.admin-issuers .subtitle{ color:var(--muted); font-size:13px; margin:0 0 12px; }
+
+/* ===== Toolbar (filtros + botón) ===== */
+.admin-issuers .toolbar{ margin-bottom:12px; }
+.admin-issuers .panel select{
+  display:block; width:100%;
+  background:var(--card-2); color:var(--text);
+  border:1px solid var(--border-2); border-radius:10px;
+  padding:10px 12px; margin:0 0 10px 0;
+}
+.admin-issuers .panel button{
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer;
+  border:1px solid var(--border-2); background:transparent; color:#cfd2ff;
+  transition:.15s ease;
+}
+.admin-issuers .panel button:hover{ background:#1a1a38; }
+.admin-issuers .panel .btn-primary{ background:var(--accent); color:#fff; border-color:var(--accent-2); }
+
+/* Variante desktop en una fila (opcional) */
+@media (min-width: 980px){
+  .admin-issuers .filters-row{
+    display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:10px; margin-bottom:12px;
+  }
+  .admin-issuers .filters-row select{ margin-bottom:0; }
+}
+
+/* ===== Tarjeta de formulario ===== */
+.admin-issuers .card{
+  background:var(--card); border:1px solid var(--border-2);
+  border-radius:14px; padding:16px; margin-top:10px;
+}
+.admin-issuers .form{ display:grid; gap:14px; }
+.admin-issuers .form-row{ display:grid; gap:6px; }
+.admin-issuers label{ font-weight:600; font-size:13px; }
+.admin-issuers input, .admin-issuers textarea, .admin-issuers select{
+  background:var(--card-2); color:var(--text);
+  border:1px solid var(--border-2); border-radius:10px; padding:10px 12px; width:100%;
+}
+.admin-issuers textarea{ resize:vertical; min-height:90px; }
+.admin-issuers .form-actions{ display:flex; justify-content:flex-end; gap:10px; }
+
+/* ===== Tabla oscura (match con Catálogos) ===== */
+.admin-issuers .table-wrap{ overflow:auto; }
+.admin-issuers table{
+  width:100%; border-collapse:separate; border-spacing:0;
+  background:var(--card-2); border:1px solid var(--border-2);
+  border-radius:12px; overflow:hidden;
+}
+.admin-issuers thead th{
+  background:#17173a; color:#eaeafb; text-align:left;
+  padding:12px; font-size:13px; letter-spacing:.2px;
+}
+.admin-issuers td{
+  padding:12px; border-top:1px solid #20204a; color:#e6e6f4;
+}
+.admin-issuers tr:hover td{ background:#14143a; }
+
+/* ===== Acciones en tabla: pill iguales a Catálogos ===== */
+.admin-issuers .cell-actions{ display:flex; gap:10px; align-items:center; }
+
+/* Base pill */
+.admin-issuers .btn-pill{
+  padding:8px 14px; line-height:1;
+  font-size:14px; font-weight:700;
+  border-radius:9999px;
+  transition:.15s ease;
+}
+
+/* Editar: outline con borde y texto azules */
+.admin-issuers .btn-edit{
+  background:transparent;
+  color:var(--accent);
+  border:1px solid #2f2f64;
+  box-shadow: inset 0 0 0 1px #2f2f64;
+}
+.admin-issuers .btn-edit:hover{
+  background:#1a1a38;
+  border-color:#3b3b78;
+  box-shadow: inset 0 0 0 1px #3b3b78;
+}
+
+/* Eliminar: pill rojo sólido */
+.admin-issuers .btn-danger{
+  background:var(--danger);
+  color:#fff;
+  border:1px solid var(--danger-2);
+}
+.admin-issuers .btn-danger:hover{ filter:brightness(1.05); }
+
+.admin-issuers .btn-danger{
+  background: var(--danger) !important; /* mismo token que usas en Catálogos */
+  color: #fff !important;
+  border: 1px solid #aa3841 !important; /* mismo borde rojizo */
+  /* mantiene el “pill” de .btn-pill que ya tienes */
+}
+.admin-issuers .btn-danger:hover{
+  filter: brightness(1.07);
+}
+
+/* Responsive pequeños */
+@media (max-width: 560px){
+  .admin-issuers .brand h1{ font-size:28px; }
+}
