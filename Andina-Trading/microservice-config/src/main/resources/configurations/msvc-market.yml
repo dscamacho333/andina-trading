@@ -1,0 +1,37 @@
+server:
+  port: ${MS_MARKET_PORT}
+spring:
+  application:
+    name: msvc-market
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${MS_DATASOURCE_URL}
+    username: ${MS_USERNAME}
+    password: ${MS_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+eureka:
+  instance:
+    hostname: ${MS_EUREKA_SERVER_HOSTNAME}
+  client:
+    service-url:
+      defaultZone: ${MS_EUREKA_SERVER_DEFAULT_ZONE}
+
+alpaca:
+  market:
+    base-url: https://data.alpaca.markets
+    api-key-id: ${APCA_API_KEY_ID_MARKET}
+    api-secret-key: ${APCA_API_SECRET_KEY_MARKET}
+    feed: iex
+    default-watchlist: AAPL,MSFT,AMZN,META,GOOGL
+  broker:
+    api-key-id: ${APCA_API_KEY_ID_BROKER}
+    api-secret: ${APCA_API_SECRET_KEY_BROKER}
+    base-url: https://broker-api.sandbox.alpaca.markets
+  financial:
+    url: https://financialmodelingprep.com/api/v3/profile/
+    api-key: ${FMP_API_SECRET_KEY}
