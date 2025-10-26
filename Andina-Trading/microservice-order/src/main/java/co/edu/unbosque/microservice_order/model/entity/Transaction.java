@@ -1,8 +1,8 @@
-package co.edu.unbosque.microservice_investor.model.entity;
+package co.edu.unbosque.microservice_order.model.entity;
 
+import co.edu.unbosque.microservice_order.model.enums.TransactionStatus;
+import co.edu.unbosque.microservice_order.model.enums.TransactionType;
 
-import co.edu.unbosque.microservice_investor.model.enums.TransactionStatus;
-import co.edu.unbosque.microservice_investor.model.enums.TransactionType;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

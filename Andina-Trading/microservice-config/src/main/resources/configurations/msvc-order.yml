@@ -1,0 +1,47 @@
+server:
+  port: ${MS_ORDER_PORT}
+spring:
+  application:
+    name: msvc-order
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${MS_DATASOURCE_URL}
+    username: ${MS_USERNAME}
+    password: ${MS_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: ${MS_EUREKA_SERVER_DEFAULT_ZONE}
+
+platform:
+  commission:
+    percentage: 0.10
+
+alpaca:
+  broker:
+    api-key-id: ${APCA_API_KEY_ID_BROKER}
+    api-secret: ${APCA_API_SECRET_KEY_BROKER}
+    base-url: https://broker-api.sandbox.alpaca.markets
+
+
+springdoc:
+  swagger-ui:
+    path: /docs
+  api-docs:
+    path: /v3/api-docs
+
+services:
+  investor:
+    base-url: http://localhost:8080/api/investor
+
+  notifications:
+    base-url: http://localhost:8080/api/notifications

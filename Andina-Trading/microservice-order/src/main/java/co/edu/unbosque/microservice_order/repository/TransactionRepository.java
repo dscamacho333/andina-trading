@@ -1,8 +1,8 @@
-package co.edu.unbosque.microservice_investor.repository;
+package co.edu.unbosque.microservice_order.repository;
 
-import co.edu.unbosque.microservice_investor.model.entity.Transaction;
-import co.edu.unbosque.microservice_investor.model.enums.TransactionStatus;
-import co.edu.unbosque.microservice_investor.model.enums.TransactionType;
+import co.edu.unbosque.microservice_order.model.entity.Transaction;
+import co.edu.unbosque.microservice_order.model.enums.TransactionStatus;
+import co.edu.unbosque.microservice_order.model.enums.TransactionType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

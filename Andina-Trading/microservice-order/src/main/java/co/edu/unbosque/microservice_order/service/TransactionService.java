@@ -1,15 +1,16 @@
-package co.edu.unbosque.microservice_investor.service;
+package co.edu.unbosque.microservice_order.service;
 
-import co.edu.unbosque.microservice_investor.model.dto.RechargeDTO;
-import co.edu.unbosque.microservice_investor.model.dto.TransactionDTO;
-import co.edu.unbosque.microservice_investor.model.entity.Transaction;
-import co.edu.unbosque.microservice_investor.model.enums.TransactionStatus;
-import co.edu.unbosque.microservice_investor.model.enums.TransactionType;
-import co.edu.unbosque.microservice_investor.repository.TransactionRepository;
+import co.edu.unbosque.microservice_order.model.dto.RechargeDTO;
+import co.edu.unbosque.microservice_order.model.dto.TransactionDTO;
+import co.edu.unbosque.microservice_order.model.entity.Transaction;
+import co.edu.unbosque.microservice_order.model.enums.TransactionStatus;
+import co.edu.unbosque.microservice_order.model.enums.TransactionType;
+import co.edu.unbosque.microservice_order.repository.TransactionRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,24 +25,36 @@ public class TransactionService {
         this.modelMapper = modelMapper;
     }
 
-    public TransactionDTO createTransaction(Transaction transaction) {
+    public TransactionDTO createTransaction(TransactionDTO transaction) {
         return modelMapper.map(
                 transactionRepository.save(
-                        transaction
+                        modelMapper.map(transaction, Transaction.class)
                 )
                 , TransactionDTO.class);
     }
 
-    public List<Transaction> getPendingRechargesByUser(Integer userId) {
+    public List<TransactionDTO> getPendingRechargesByUser(Integer userId) {
         return transactionRepository.findByUserIdAndTypeAndStatus(
                 userId,
                 TransactionType.RECHARGE,
                 TransactionStatus.PENDING
-        );
+        ).stream()
+                .map(tx -> new TransactionDTO(
+                        tx.getTransactionId(),
+                        tx.getUserId(),
+                        tx.getOrderId(),
+                        tx.getAmount(),
+                        tx.getType(),
+                        tx.getDescription(),
+                        tx.getCreatedAt(),
+                        tx.getStatus(),
+                        tx.getAlpacaId()
+                ))
+                .toList();
     }
 
-    public void updateTransaction(Transaction transaction) {
-        transactionRepository.save(transaction);
+    public void updateTransaction(TransactionDTO transaction) {
+        transactionRepository.save(modelMapper.map(transaction,  Transaction.class));
     }
 
     public List<RechargeDTO> getRechargeDTOsByUser(Integer userId) {
@@ -77,8 +90,6 @@ public class TransactionService {
     public List<Transaction> findByOrderId(Integer orderId) {
         return transactionRepository.findByOrderId(orderId);
     }
-
-
 
 
 }

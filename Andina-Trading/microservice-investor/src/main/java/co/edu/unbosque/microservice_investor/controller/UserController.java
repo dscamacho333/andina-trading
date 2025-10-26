@@ -31,6 +31,11 @@ public class UserController {
         this.service = service;
     }
 
+    @GetMapping("/{id}")
+    public UserDTO getUserById(@PathVariable Integer id) {
+        return service.getUserById(id);
+    }
+
     // Get all users
     @GetMapping
     public List<UserDTO> getAllUsers() {
@@ -107,12 +112,6 @@ public class UserController {
     @GetMapping("/search")
     public List<UserDTO> searchUsersByName(@RequestParam String name) {
         return service.searchUsersByName(name);
-    }
-
-    // Simple backend test endpoint
-    @GetMapping("/test")
-    public String test() {
-        return "Hello from the backend";
     }
 
     @PutMapping("/me/preferences")
