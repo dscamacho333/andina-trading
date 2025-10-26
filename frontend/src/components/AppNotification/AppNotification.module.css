@@ -1,0 +1,58 @@
+.notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  font-weight: 500;
+  color: white;
+  animation: slideDown 0.4s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.success {
+  background-color: #28a745;
+}
+
+.danger {
+  background-color: #dc3545;
+}
+
+.info {
+  background-color: #17a2b8;
+}
+
+.warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.notification span {
+  margin-right: 30rem; 
+  white-space: nowrap;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 30rem; /* TODO: ajustar este componente a un layout decente */
+}

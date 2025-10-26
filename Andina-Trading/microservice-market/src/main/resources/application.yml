@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: msvc-market
+  config:
+    import: configserver:${MS_CONFIG_SERVER_IMPORT_PATH}

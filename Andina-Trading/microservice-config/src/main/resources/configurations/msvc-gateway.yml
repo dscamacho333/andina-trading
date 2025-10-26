@@ -4,39 +4,27 @@ server:
 spring:
   application:
     name: msvc-gateway
-
-  # Activate API Gateway
   cloud:
     gateway:
-
       discovery:
         locator:
           enabled: true
-
       server:
         webmvc:
-
-          # Define routes for api gateway
           routes:
-            # Here should be each microservice routes
             - id: system-management
               uri: http://localhost:8050
               predicates:
                 - Path=/api/v1/country/**,/api/v1/city/**,/api/v1/economy-situation/**,/api/v1/sector/**,/api/v1/industry/**,/api/v1/issuer/**
-            # Here should be each microservice routes
             - id: market
               uri: http://localhost:8001
               predicates:
                 - Path=/api/stocks
+            - id: investor
+              uri: http://localhost:8010
+              predicates:
+                - Path=/api/investor/**
 
-      globalcors:
-        corsConfigurations:
-          "[/**]":
-            allowedOrigins:
-              - http://localhost:5174
-            allowedMethods: "*"
-            allowedHeaders: "*"
-            allowCredentials: true
 
 eureka:
   client:

@@ -1,0 +1,47 @@
+/* src/pages/Stocks/StocksPage.module.css */
+
+.container {
+    min-height: calc(100vh - 115px);
+    height: 100%;
+    padding: 24px;
+    color: #fff;
+}
+
+.container label {
+    color: #fff;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.filterContainer {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.select {
+    padding: 4px 8px;
+    font-size: 14px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f4f4f4;
+    font-weight: 600;
+}

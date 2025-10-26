@@ -27,6 +27,7 @@
     <module>microservice-gateway</module>
     <module>microservice-system-management</module>
       <module>microservice-market</module>
+      <module>microservice-investor</module>
   </modules>
 
 
