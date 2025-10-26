@@ -1,9 +1,9 @@
 package co.edu.unbosque.microservice_investor.service;
 
 
+import co.edu.unbosque.microservice_investor.client.TransactionClient;
 import co.edu.unbosque.microservice_investor.exception.CustomAlpacaException;
 import co.edu.unbosque.microservice_investor.model.dto.*;
-import co.edu.unbosque.microservice_investor.model.entity.Transaction;
 import co.edu.unbosque.microservice_investor.model.enums.AccountStatus;
 import co.edu.unbosque.microservice_investor.model.enums.Role;
 import co.edu.unbosque.microservice_investor.model.enums.TransactionStatus;
@@ -41,10 +41,10 @@ public class AccountService {
 
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserService userService;
-    private final TransactionService transactionService;
+    private final TransactionClient transactionService;
     private final RestTemplate restTemplate;
 
-    public AccountService(@Qualifier("brokerRestTemplate") RestTemplate restTemplate, UserService userService, TransactionService transactionService) {
+    public AccountService(@Qualifier("brokerRestTemplate") RestTemplate restTemplate, UserService userService, TransactionClient transactionService) {
         this.restTemplate = restTemplate;
         this.userService = userService;
         this.transactionService = transactionService;
@@ -263,7 +263,7 @@ public class AccountService {
             String alpacaTransferId = (String) responseBody.get("id");
 
             // Crear transacción en la DB
-            Transaction transaction = new Transaction(null, user.getId(), null, amount, TransactionType.RECHARGE, "Recarga realizada por ForestTrade", LocalDateTime.now(), TransactionStatus.PENDING, alpacaTransferId);
+            TransactionDTO transaction = new TransactionDTO(null, user.getId(), null, amount, TransactionType.RECHARGE, "Recarga realizada por ForestTrade", LocalDateTime.now(), TransactionStatus.PENDING, alpacaTransferId);
 
             transactionService.createTransaction(transaction);
 
@@ -276,7 +276,7 @@ public class AccountService {
 
     public void checkPendingRecharges(Integer userId) {
         UserDTO user = userService.getUserById(userId);
-        List<Transaction> pendingRecharges = transactionService.getPendingRechargesByUser(userId);
+        List<TransactionDTO> pendingRecharges = transactionService.getPendingRechargesByUser(userId);
 
         if (pendingRecharges.isEmpty()) return;
 
@@ -300,7 +300,7 @@ public class AccountService {
                             (existing, replacement) -> existing // evitar duplicados
                     ));
 
-            for (Transaction transaction : pendingRecharges) {
+            for (TransactionDTO transaction : pendingRecharges) {
                 String alpacaId = transaction.getAlpacaId();
                 Map transferData = transferMap.get(alpacaId);
 

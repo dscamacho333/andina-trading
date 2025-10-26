@@ -16,10 +16,17 @@ spring:
 
 eureka:
   instance:
-    hostname: ${MS_EUREKA_SERVER_HOSTNAME}
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
   client:
     service-url:
       defaultZone: ${MS_EUREKA_SERVER_DEFAULT_ZONE}
+
+springdoc:
+  swagger-ui:
+    path: /docs
+  api-docs:
+    path: /v3/api-docs
 
 alpaca:
   market:
