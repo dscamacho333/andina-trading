@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/accounts'; // Ajusta esta URL si usas proxy o variable de entorno
+const API_URL = 'http://localhost:8080/api/investor/account'; // Ajusta esta URL si usas proxy o variable de entorno
 
 /**
  * Envía la solicitud de creación de cuenta a Alpaca vía backend

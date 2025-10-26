@@ -106,6 +106,20 @@ public class AccountController {
         }
     }
 
+    @PostMapping("/{id}/balance/validate")
+    void validateBalance(@PathVariable("id") Integer id, @RequestParam("amount") float amount){
+        service.validateBalance(id, amount);
+    };
+
+    @PostMapping("/{id}/balance/subtract")
+    void subtractFromBalance(@PathVariable("id") Integer id, @RequestParam("amount") float amount){
+        service.subtractFromBalance(id, amount);
+    };
+
+    @PostMapping("/{id}/balance/add")
+    void addToBalance(@PathVariable("id") Integer id, @RequestParam("amount") float amount){
+        service.addToBalance(id, amount);
+    };
 
 
 
