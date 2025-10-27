@@ -29,6 +29,10 @@ spring:
               uri: lb://msvc-order
               predicates:
                 - Path=/api/orders/**,/api/transaction/**
+            - id: contract
+              uri: lb://msvc-contract
+              predicates:
+                - Path=/api/email
             # ---------- Rutas de DOCS (proxy de /v3/api-docs) ----------
             - id: docs-investor
               uri: lb://msvc-investor
