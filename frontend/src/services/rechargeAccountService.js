@@ -14,33 +14,6 @@ export const getRechargeHistory = async (userId) => {
   );
   const data = await response.json();
 
-  // const data = [
-  //   {
-  //     amount: 25.0,
-  //     createdAt: "2025-04-28T09:15:30Z",
-  //     status: "COMPLETED", // ó 'COMPLETADO'
-  //   },
-  //   {
-  //     amount: 40.5,
-  //     createdAt: "2025-04-29T13:22:10Z",
-  //     status: "PENDING", // ó 'PENDIENTE'
-  //   },
-  //   {
-  //     amount: 12.75,
-  //     createdAt: "2025-04-30T18:47:05Z",
-  //     status: "FAILED", // ó 'FALLIDO'
-  //   },
-  //   {
-  //     amount: 100.0,
-  //     createdAt: "2025-05-01T07:05:55Z",
-  //     status: "COMPLETED",
-  //   },
-  //   {
-  //     amount: 60.25,
-  //     createdAt: "2025-05-01T15:30:00Z",
-  //     status: "PENDING",
-  //   },
-  // ];
 
   if (!response.ok) {
     const errorData = await response.json();
@@ -79,7 +52,7 @@ export const relateBankAccount = async (data) => {
 };
 
 export const rechargeAccount = async (data) => {
-  const response = await fetch("http://localhost:8080/investor/api/account/recharge", {
+  const response = await fetch("http://localhost:8080/api/investor/account/recharge", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

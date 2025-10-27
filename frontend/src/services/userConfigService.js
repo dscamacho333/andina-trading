@@ -2,7 +2,7 @@
 import axios from "axios";
 import { getToken } from "./authService";
 
-const API_URL = "http://localhost:8080/api/users"; // Ajustar si cambia el puerto
+const API_URL = "http://localhost:8080/api/investor"; // Ajustar si cambia el puerto
 
 export const updateUserPreferences = async (preferences) => {
   const token = getToken();

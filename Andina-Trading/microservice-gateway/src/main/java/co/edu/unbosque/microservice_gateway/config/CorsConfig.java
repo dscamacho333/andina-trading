@@ -18,7 +18,8 @@ public class CorsConfig {
         // usa patterns para que no falle con comprobaciones estrictas
         cfg.setAllowedOriginPatterns(List.of(
                 "http://localhost:3000",
-                "http://localhost:5174"
+                "http://localhost:5174",
+                "http://localhost:8080"
         ));
         cfg.setAllowedMethods(List.of("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
         cfg.setAllowedHeaders(List.of("*"));

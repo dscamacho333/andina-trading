@@ -96,7 +96,7 @@ export const cancelOrder = async (orderId) => {
 export const getTransactionsByOrder = async (orderId) => {
   try {
     const response = await axios.get(
-      `${API_URL}/api/transactions/order/${orderId}`
+      `${API_URL}/api/transaction/order/${orderId}`
     );
     return response.data; // Lista de transacciones
   } catch (error) {
