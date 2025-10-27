@@ -5,6 +5,7 @@ import co.edu.unbosque.microservice_order.model.dto.RechargeDTO;
 import co.edu.unbosque.microservice_order.model.dto.TransactionDTO;
 import co.edu.unbosque.microservice_order.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,17 @@ public class TransactionController {
     @Autowired
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
+    }
+
+    @GetMapping("/order/{orderId}")
+    public ResponseEntity<List<TransactionDTO>> getTransactionsByOrder(@PathVariable Integer orderId) {
+        List<TransactionDTO> transactions = transactionService.findByOrderId(orderId);
+
+        if (transactions.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(transactions);
     }
 
     @PostMapping

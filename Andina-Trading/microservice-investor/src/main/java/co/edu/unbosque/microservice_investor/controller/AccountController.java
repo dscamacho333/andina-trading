@@ -63,8 +63,8 @@ public class AccountController {
 
     @GetMapping("/recharges/pending/check/{userId}")
     public ResponseEntity<String> checkPendingRecharges(@PathVariable Integer userId) {
-        accountService.checkPendingRecharges(userId);
-        return ResponseEntity.ok("Recargas pendientes revisadas y actualizadas correctamente.");
+        String resultado = accountService.checkPendingRecharges(userId);
+        return ResponseEntity.ok(resultado);
     }
 
     @GetMapping("/recharges/{userId}")

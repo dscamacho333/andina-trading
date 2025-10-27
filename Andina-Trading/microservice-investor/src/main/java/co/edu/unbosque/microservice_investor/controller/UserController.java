@@ -1,12 +1,13 @@
 package co.edu.unbosque.microservice_investor.controller;
 
 import co.edu.unbosque.microservice_investor.model.dto.LoginResponse;
+import co.edu.unbosque.microservice_investor.model.dto.PortfolioDTO;
 import co.edu.unbosque.microservice_investor.model.dto.UserDTO;
 import co.edu.unbosque.microservice_investor.model.dto.UserLoginDTO;
 import co.edu.unbosque.microservice_investor.model.enums.AccountStatus;
 import co.edu.unbosque.microservice_investor.model.enums.Role;
 import co.edu.unbosque.microservice_investor.security.JwtUtil;
-import co.edu.unbosque.microservice_investor.service.SyncService;
+import co.edu.unbosque.microservice_investor.service.PortfolioService;
 import co.edu.unbosque.microservice_investor.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,30 +23,44 @@ import java.util.List;
 
 public class UserController {
 
-    private final UserService service;
+    private final UserService userService;
+    private final PortfolioService portfolioService;
 
     @Autowired
     private JwtUtil jwtUtil;
 
-    public UserController(UserService service, SyncService userAccountSyncService) {
-        this.service = service;
+    public UserController( UserService userService, PortfolioService portfolioService) {
+        this.userService = userService;
+        this.portfolioService = portfolioService;
+    }
+
+    @GetMapping("/portfolio/{accountId}")
+    public ResponseEntity<PortfolioDTO> getPortfolio(@PathVariable String accountId) {
+        PortfolioDTO portfolio = portfolioService.getPortfolio(accountId);
+        if (portfolio != null) {
+            return ResponseEntity.ok(portfolio);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/{id}")
     public UserDTO getUserById(@PathVariable Integer id) {
-        return service.getUserById(id);
+        return userService.getUserById(id);
     }
+
+
 
     // Get all users
     @GetMapping
     public List<UserDTO> getAllUsers() {
-        return service.getAllUsers();
+        return userService.getAllUsers();
     }
 
     // Register a new user
     @PostMapping
     public UserDTO registerUser(@RequestBody UserDTO user) {
-        return service.createUser(user);
+        return userService.createUser(user);
     }
 
     // Login user
@@ -53,7 +68,7 @@ public class UserController {
     public ResponseEntity<LoginResponse> loginUser(@RequestBody UserLoginDTO request) {
 
         try {
-            LoginResponse response = service.loginUser(request.getEmail(), request.getPassword());
+            LoginResponse response = userService.loginUser(request.getEmail(), request.getPassword());
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             LoginResponse errorResponse = new LoginResponse(e.getMessage());
@@ -66,7 +81,7 @@ public class UserController {
         try {
             String token = authHeader.replace("Bearer ", "");
             Integer userId = jwtUtil.extractUserId(token);
-            UserDTO user = service.getUserById(userId);
+            UserDTO user = userService.getUserById(userId);
             user.setPassword(null);
             user.setPasswordHash(null);
             return ResponseEntity.ok(user);
@@ -81,37 +96,37 @@ public class UserController {
     // Find by email
     @GetMapping("/find")
     public UserDTO getUserByEmail(@RequestParam String email) {
-        return service.getUserByEmail(email);
+        return userService.getUserByEmail(email);
     }
 
     // Check if email exists
     @GetMapping("/exists")
     public boolean checkIfEmailExists(@RequestParam String email) {
-        return service.emailExists(email);
+        return userService.emailExists(email);
     }
 
     // Get users by role
     @GetMapping("/role")
     public List<UserDTO> getUsersByRole(@RequestParam Role role) {
-        return service.getUsersByRole(role);
+        return userService.getUsersByRole(role);
     }
 
     // Get users by account status
     @GetMapping("/status")
     public List<UserDTO> getUsersByStatus(@RequestParam AccountStatus status) {
-        return service.getUsersByStatus(status);
+        return userService.getUsersByStatus(status);
     }
 
     // Get users with active subscriptions
     @GetMapping("/subscribed")
     public List<UserDTO> getSubscribedUsers() {
-        return service.getUsersWithSubscription();
+        return userService.getUsersWithSubscription();
     }
 
     // Search users by name (partial match)
     @GetMapping("/search")
     public List<UserDTO> searchUsersByName(@RequestParam String name) {
-        return service.searchUsersByName(name);
+        return userService.searchUsersByName(name);
     }
 
     @PutMapping("/me/preferences")
@@ -126,7 +141,7 @@ public class UserController {
             }
 
             userDTO.setId(userId);
-            service.updateUserPreferences(userDTO);
+            userService.updateUserPreferences(userDTO);
             return ResponseEntity.ok().build();
 
         } catch (EntityNotFoundException e) {

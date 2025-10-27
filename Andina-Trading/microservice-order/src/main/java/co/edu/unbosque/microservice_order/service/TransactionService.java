@@ -87,8 +87,20 @@ public class TransactionService {
         }
     }
 
-    public List<Transaction> findByOrderId(Integer orderId) {
-        return transactionRepository.findByOrderId(orderId);
+    public List<TransactionDTO> findByOrderId(Integer orderId) {
+        return transactionRepository.findByOrderId(orderId).stream()
+                .map(tx -> new TransactionDTO(
+                        tx.getTransactionId(),
+                        tx.getUserId(),
+                        tx.getOrderId(),
+                        tx.getAmount(),
+                        tx.getType(),
+                        tx.getDescription(),
+                        tx.getCreatedAt(),
+                        tx.getStatus(),
+                        tx.getAlpacaId()
+                ))
+                .toList();
     }
 
 

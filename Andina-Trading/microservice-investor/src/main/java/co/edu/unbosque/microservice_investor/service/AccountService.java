@@ -274,11 +274,11 @@ public class AccountService {
         }
     }
 
-    public void checkPendingRecharges(Integer userId) {
+    public String checkPendingRecharges(Integer userId) {
         UserDTO user = userService.getUserById(userId);
         List<TransactionDTO> pendingRecharges = transactionService.getPendingRechargesByUser(userId);
 
-        if (pendingRecharges.isEmpty()) return;
+        if (pendingRecharges.isEmpty()) return "Sin recargas pendientes";
 
         String accountId = user.getAlpacaAccountId();
         HttpHeaders headers = buildAlpacaHeaders();
@@ -290,7 +290,7 @@ public class AccountService {
             );
 
             Map[] transfers = response.getBody();
-            if (transfers == null || transfers.length == 0) return;
+            if (transfers == null || transfers.length == 0) return "Sin transferencias en alpaca";
 
             // Indexamos transferencias por ID para búsquedas rápidas
             Map<String, Map> transferMap = Arrays.stream(transfers)
@@ -318,6 +318,7 @@ public class AccountService {
                     transactionService.updateTransaction(transaction);
                 }
             }
+            return "Transacciones actualizadas correctamente";
 
         } catch (HttpClientErrorException | HttpServerErrorException ex) {
             throw new CustomAlpacaException(ex.getRawStatusCode(), ex.getResponseBodyAsString());
