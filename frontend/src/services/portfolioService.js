@@ -2,7 +2,7 @@
 import api from './api';
 
 export const getPortfolio = async (accountId) => {
-  const response = await api.get(`/portfolios/${accountId}`);
+  const response = await api.get(`/investor/portfolio/${accountId}`);
   return response.data;
 };
 
