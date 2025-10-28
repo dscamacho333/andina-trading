@@ -77,3 +77,36 @@ CREATE TABLE ISSUER (
   FOREIGN KEY (industry_id) REFERENCES INDUSTRY(id)
   
 );
+
+CREATE TABLE DOCUMENT_TYPE(
+	
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    code VARCHAR(10) NOT NULL UNIQUE,
+    name VARCHAR(50) NOT NULL,
+	country_id INTEGER NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    
+    PRIMARY KEY (id),
+    FOREIGN KEY (country_id) REFERENCES COUNTRY(id)
+
+);
+
+
+CREATE TABLE BROKER (
+  
+	id INTEGER NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    middle_name VARCHAR(50),
+    last_name VARCHAR(50) NOT NULL,
+    document_type_id INTEGER NOT NULL,
+    document_number VARCHAR(30) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    phone VARCHAR(15) NOT NULL,
+	is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+	PRIMARY KEY (id),
+    FOREIGN KEY (document_type_id) REFERENCES DOCUMENT_TYPE(id),
+     CONSTRAINT uk_broker_doctype_docnumber UNIQUE (document_type_id, document_number)
+);

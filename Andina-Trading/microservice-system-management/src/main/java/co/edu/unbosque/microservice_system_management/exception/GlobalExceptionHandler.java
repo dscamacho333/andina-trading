@@ -36,6 +36,13 @@ public class GlobalExceptionHandler {
                 .body(exception.getMessage());
     }
 
+    @ExceptionHandler(BrokerNotFoundException.class)
+    public ResponseEntity<?> handleBrokerNotFoundException(BrokerNotFoundException exception) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
+    }
+
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<?> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException exception){
         return ResponseEntity

@@ -162,3 +162,64 @@ INNER JOIN
 	INDUSTRY ind ON i.industry_id = ind.id
 WHERE
 	i.is_active = True AND ind.sector_id = 1;
+    
+# Find all Active Document Types
+SELECT
+	d.id,
+    d.code,
+    d.name,
+    d.country_id,
+    d.is_active
+FROM
+	DOCUMENT_TYPE d
+WHERE
+	d.is_active = True;
+    
+    
+# Delete Broker By ID
+UPDATE 
+	BROKER b
+SET
+	b.is_active = FALSE
+WHERE
+	b.id = 8;
+    
+# Find All Active Brokers
+SELECT
+	b.id,
+    b.first_name,
+    b.middle_name,
+    b.last_name,
+    b.document_type_id,
+    b.document_number,
+    b.email,
+    b.phone,
+    b.is_active,
+    b.created_at,
+    b.updated_at
+FROM
+	BROKER b
+WHERE
+	b.is_active = True;
+    
+# Find All Active Brokers By Country ID
+SELECT
+	b.id,
+    b.first_name,
+    b.middle_name,
+    b.last_name,
+    b.document_type_id,
+    b.document_number,
+    b.email,
+    b.phone,
+    b.is_active,
+    b.created_at,
+    b.updated_at
+FROM
+	BROKER b
+INNER JOIN 
+	DOCUMENT_TYPE dt ON b.document_type_id = dt.id
+INNER JOIN 
+	COUNTRY c ON dt.country_id = c.id
+WHERE
+	(b.is_active = True) AND (c.id = 1);
