@@ -16,7 +16,7 @@ spring:
             - id: system-management
               uri: http://localhost:8050
               predicates:
-                - Path=/api/v1/country/**,/api/v1/city/**,/api/v1/economy-situation/**,/api/v1/sector/**,/api/v1/industry/**,/api/v1/issuer/**
+                - Path=/api/v1/**
             - id: market
               uri: lb://msvc-market
               predicates:

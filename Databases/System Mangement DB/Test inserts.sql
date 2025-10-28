@@ -133,3 +133,72 @@ INSERT INTO ISSUER (name, ticker, country_id, industry_id, website, notes, is_ac
  (SELECT i.id FROM INDUSTRY i JOIN SECTOR s ON s.id=i.sector_id
    WHERE s.name='Energía' AND i.name='Petróleo y Gas'),
  'https://www.pdvsa.com', '', TRUE);
+ 
+ -- CO
+INSERT INTO DOCUMENT_TYPE (code, name, country_id) VALUES
+('CC',   'Cédula de Ciudadanía', (SELECT id FROM COUNTRY WHERE code='CO'));
+-- EC
+INSERT INTO DOCUMENT_TYPE (code, name, country_id) VALUES
+('CI',   'Cédula de Identidad',   (SELECT id FROM COUNTRY WHERE code='EC'));
+-- PE
+INSERT INTO DOCUMENT_TYPE (code, name, country_id) VALUES
+('DNI',  'Documento Nacional de Identidad', (SELECT id FROM COUNTRY WHERE code='PE'));
+-- VE
+INSERT INTO DOCUMENT_TYPE (code, name, country_id) VALUES
+('CV', 'Cédula de Identidad Venezolana', (SELECT id FROM COUNTRY WHERE code='VE'));
+
+-- ===== COLOMBIA (CO) - document_type: CC
+INSERT INTO BROKER
+  (first_name, middle_name, last_name, document_type_id, document_number, email, phone, is_active)
+VALUES
+('Ana',   NULL, 'Pérez',
+  (SELECT dt.id FROM DOCUMENT_TYPE dt JOIN COUNTRY c ON c.id = dt.country_id
+     WHERE c.code = 'CO' AND dt.code = 'CC'),
+ '10203040', 'ana.perez@broker.com', '+57-3001234567', TRUE),
+
+('Luis',  NULL, 'García',
+  (SELECT dt.id FROM DOCUMENT_TYPE dt JOIN COUNTRY c ON c.id = dt.country_id
+     WHERE c.code = 'CO' AND dt.code = 'CC'),
+ '20406080', 'luis.garcia@broker.com', '+57-3012345678', TRUE);
+
+-- ===== ECUADOR (EC) - document_type: CI
+INSERT INTO BROKER
+  (first_name, middle_name, last_name, document_type_id, document_number, email, phone, is_active)
+VALUES
+('María',  NULL, 'López',
+  (SELECT dt.id FROM DOCUMENT_TYPE dt JOIN COUNTRY c ON c.id = dt.country_id
+     WHERE c.code = 'EC' AND dt.code = 'CI'),
+ '0912345678', 'maria.lopez@broker.com', '+593-991112233', TRUE),
+
+('Diego', 'A.', 'Torres',
+  (SELECT dt.id FROM DOCUMENT_TYPE dt JOIN COUNTRY c ON c.id = dt.country_id
+     WHERE c.code = 'EC' AND dt.code = 'CI'),
+ '0922334455', 'diego.torres@broker.com', '+593-981234567', TRUE);  -- inactivo para pruebas
+
+-- ===== PERÚ (PE) - document_type: DNI
+INSERT INTO BROKER
+  (first_name, middle_name, last_name, document_type_id, document_number, email, phone, is_active)
+VALUES
+('Carla', NULL, 'Rojas',
+  (SELECT dt.id FROM DOCUMENT_TYPE dt JOIN COUNTRY c ON c.id = dt.country_id
+     WHERE c.code = 'PE' AND dt.code = 'DNI'),
+ '45678901', 'carla.rojas@broker.com', '+51-981122334', TRUE),
+
+('José',  NULL, 'Vega',
+  (SELECT dt.id FROM DOCUMENT_TYPE dt JOIN COUNTRY c ON c.id = dt.country_id
+     WHERE c.code = 'PE' AND dt.code = 'DNI'),
+ '11223344', 'jose.vega@broker.com', '+51-987654321', TRUE);
+
+-- ===== VENEZUELA (VE) - document_type: CV
+INSERT INTO BROKER
+  (first_name, middle_name, last_name, document_type_id, document_number, email, phone, is_active)
+VALUES
+('Sofía',  NULL, 'Martínez',
+  (SELECT dt.id FROM DOCUMENT_TYPE dt JOIN COUNTRY c ON c.id = dt.country_id
+     WHERE c.code = 'VE' AND dt.code = 'CV'),
+ 'V-12345678', 'sofia.martinez@broker.com', '+58-2123456789', TRUE),
+
+('Pedro',  NULL, 'Gómez',
+  (SELECT dt.id FROM DOCUMENT_TYPE dt JOIN COUNTRY c ON c.id = dt.country_id
+     WHERE c.code = 'VE' AND dt.code = 'CV'),
+ 'V-87654321', 'pedro.gomez@broker.com', '+58-2141112233', TRUE);
