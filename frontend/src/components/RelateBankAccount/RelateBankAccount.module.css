@@ -1,0 +1,83 @@
+.container {
+  min-height: calc(100vh - 115px);
+  height: 100%;
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.header p {
+  font-size: 16px;
+  color: #c2b8b8;
+  font-style: italic;
+}
+
+.header p span {
+  color: #fff;
+  font-weight: bold;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.formContainer .form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainer .form .inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.formContainer .form .inputGroup label {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.formContainer .form .inputGroup select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formContainer .form .inputGroup input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formContainer .form .inputGroup input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.formContainer .form button {
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #bda7f5, #a483ff);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.formContainer .form button:hover {
+  opacity: .9;
+}

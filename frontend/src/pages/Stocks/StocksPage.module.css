@@ -1,0 +1,22 @@
+/* src/pages/Stocks/StocksPage.module.css */
+
+.container {
+    min-height: calc(100vh - 115px);
+    height: 100%;
+}
+
+/* Estilos generales para la página */
+.stock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}

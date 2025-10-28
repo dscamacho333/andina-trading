@@ -1,0 +1,151 @@
+header {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem 1rem;
+  border-bottom: 1px solid #2b2835;
+  color: #ffffff;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+button:hover {
+  color: #bda7f5;
+  background-color: transparent;
+}
+
+.button {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background: linear-gradient(90deg, #ece7f8, #a483ff);
+  color: #0e0c13;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 1.5rem;
+}
+
+.button:hover {
+  filter: brightness(1.1);
+}
+
+.icon {
+  font-size: 1.4rem;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.iconButton {
+  font-size: 1.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 1rem;
+  margin-bottom: 3px;
+}
+
+.link {
+  color: #cccccc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #ffffff;
+}
+
+.userLabel {
+  color: #FFFFFF;
+}
+
+.balanceBox {
+  padding: 16px;
+  background: linear-gradient(90deg, #bda7f5, #a483ff);
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 65%;
+}
+
+.balanceLabel {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #faf6f6;
+  margin-bottom: 0;
+}
+
+.balanceValue {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #021932;
+  margin-bottom: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 10px;
+  color: white;
+  border-right: solid gray 1px;
+}
+
+.userInfoContainer {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  color: white;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.circleIcon {
+  background-color: #d6c3ff;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textWrapper {
+  margin-left: 12px;
+}
+
+.userLabel {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.balanceLabel {
+  font-weight: 100;
+  font-size: 0.95rem;
+  color: #cfcfcf;
+  margin: 0;
+}
+
+.balanceValue {
+  font-weight: lighter;
+  font-size: 1.1rem;
+  color: white;
+}

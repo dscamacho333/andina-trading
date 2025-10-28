@@ -4,35 +4,93 @@ server:
 spring:
   application:
     name: msvc-gateway
-
-  # Activate API Gateway
   cloud:
     gateway:
-
       discovery:
         locator:
           enabled: true
-
+          lower-case-service-id: true
       server:
         webmvc:
-
-          # Define routes for api gateway
           routes:
-            # Here should be each microservice routes
             - id: system-management
               uri: http://localhost:8050
               predicates:
                 - Path=/api/v1/**
+            - id: market
+              uri: lb://msvc-market
+              predicates:
+                - Path=/api/stocks/**
+            - id: investor
+              uri: lb://msvc-investor
+              predicates:
+                - Path=/api/investor/**
+            - id: order
+              uri: lb://msvc-order
+              predicates:
+                - Path=/api/orders/**,/api/transaction/**
+            - id: contract
+              uri: lb://msvc-contract
+              predicates:
+                - Path=/api/email
+            # ---------- Rutas de DOCS (proxy de /v3/api-docs) ----------
+            - id: docs-investor
+              uri: lb://msvc-investor
+              predicates:
+                - Path=/v3/api-docs/investor
+              filters:
+                - SetPath=/v3/api-docs
 
+            - id: docs-market
+              uri: lb://msvc-market
+              predicates:
+                - Path=/v3/api-docs/market
+              filters:
+                - SetPath=/v3/api-docs
+
+            - id: docs-order
+              uri: lb://msvc-order
+              predicates:
+                - Path=/v3/api-docs/order
+              filters:
+                - SetPath=/v3/api-docs
+
+            - id: docs-system
+              uri: http://localhost:8050
+              predicates:
+                - Path=/v3/api-docs/sys
+              filters:
+                - SetPath=/v3/api-docs
       globalcors:
         corsConfigurations:
           "[/**]":
             allowedOrigins:
-              - http://localhost:5174
+              - "http://localhost:3000"
+              - "http://localhost:5174"
+              - "http://localhost:8080"
             allowedMethods: "*"
             allowedHeaders: "*"
             allowCredentials: true
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui         # UI en el gateway
+    # Múltiples fuentes: dropdown en Swagger UI
+    urls:
+      - name: investor
+        url: /v3/api-docs/investor
+      - name: market
+        url: /v3/api-docs/market
+      - name: order
+        url: /v3/api-docs/order
+      - name: system-management
+        url: /v3/api-docs/sys
+  api-docs:
+    path: /v3/api-docs    #
+
 eureka:
   client:
     register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: ${MS_EUREKA_SERVER_DEFAULT_ZONE}

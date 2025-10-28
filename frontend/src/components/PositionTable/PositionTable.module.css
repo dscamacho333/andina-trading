@@ -1,0 +1,65 @@
+* {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.span {
+  grid-column: 1 / -1;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: #ffffffa4;
+}
+
+.title {
+  grid-column: 1 / -1;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.box {
+  background-color: #0b0b15;
+  border-radius: 12px;
+  padding: 1rem;
+  color: white;
+  border: 0.1px solid #ffffff0a;
+}
+
+/* La tabla ocupa una celda */
+
+.tableWrapper {
+  grid-column: span 1;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #333;
+}
+
+/* La galería ocupa toda la fila */
+.ordersWrapper {
+  grid-column: 1 / -1;
+}
+
+.tableRow {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}

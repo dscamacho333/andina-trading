@@ -1,0 +1,92 @@
+.modal {
+    background: white;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    background: linear-gradient(90deg, #bda7f5, #a483ff);
+    color: #0e0c13;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    filter: brightness(1.1);
+}
+
+.modalHeader {
+    background: linear-gradient(90deg, #bda7f5, #a483ff);
+    padding: 15px;
+}
+
+.modalHeader .modalStockName {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.modalContent {
+    padding: 15px;
+}
+
+.modalContent .modalContentName {
+    margin-bottom: 10px;
+}
+
+.footerContent {
+    background: linear-gradient(90deg, #cfc8c8, #7e7e81);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.footerContent .btnSuccess{
+    color: #fff;
+    width: 100px;
+    padding: 8px 16px;
+    border: 2px #4ea84e solid;
+    background-color: #398a39;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.footerContent .btnSuccess:hover {
+    opacity: .8;
+}
+
+.footerContent .btnBase{
+    color: #fff;
+    width: 100px;
+    padding: 8px 16px;
+    border: 2px #bbbdbb solid;
+    background-color: #545954;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.footerContent .btnBase:hover {
+    opacity: .8;
+}

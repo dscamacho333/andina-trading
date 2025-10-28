@@ -1,0 +1,121 @@
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.container {
+    background: #363636;
+background: linear-gradient(90deg, rgba(54, 54, 54, 1) 0%, rgba(11, 11, 21, 1) 50%, rgba(11, 11, 21, 1) 100%) border-box;
+    border: 1px solid transparent;
+    border-radius: 18px;
+
+}
+
+.card {
+    background-color: #0e0e14;
+    border-radius: 18px;
+    padding: 20px;
+    width: 100%;
+    color: white;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    background-color: #d6c3ff;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoIcon {
+    color: #5b3cc4;
+    font-weight: bold;
+}
+
+.meta {
+    flex-grow: 1;
+    margin-left: 12px;
+}
+
+.type {
+    font-size: 0.75rem;
+    color: #aaa;
+    margin: 0;
+}
+
+.titleWrapper {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 10rem;
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.title {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    transition: transform 0.3s ease;
+    will-change: transform;
+}
+
+.titleWrapper:hover .title.animate {
+    animation: scrollText 6s linear infinite;
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.openIcon {
+    font-size: 1rem;
+    color: #aaa;
+}
+
+.rewardSection {
+    margin-top: 20px;
+}
+
+.rewardLabel {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+.rewardValue {
+    font-size: 2rem;
+    font-weight: lighter;
+    margin: 0;
+}
+
+.positiveChange {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #41e747;
+}
+
+.negativeChange {
+    font-size: 0.9rem;
+    color: #f44336;
+}
