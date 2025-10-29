@@ -6,9 +6,9 @@ spring:
     name: msvc-system-management
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${MS_SYSTEM_MANAGEMENT_DATASOURCE_URL}
-    username: ${MS_SYSTEM_MANAGEMENT_USERNAME}
-    password: ${MS_SYSTEM_MANAGEMENT_PASSWORD}
+    url: ${MS_DATASOURCE_URL}
+    username: ${MS_USERNAME}
+    password: ${MS_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: validate

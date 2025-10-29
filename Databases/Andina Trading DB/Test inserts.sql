@@ -1,4 +1,4 @@
-USE system_management_microservice;
+USE andina_trading;
 
 -- ECONOMY_SITUATION
 INSERT INTO ECONOMY_SITUATION (name, description) VALUES
