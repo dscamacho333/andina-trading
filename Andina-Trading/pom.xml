@@ -26,10 +26,9 @@
     <module>microservice-eureka</module>
     <module>microservice-gateway</module>
     <module>microservice-system-management</module>
-      <module>microservice-market</module>
-      <module>microservice-investor</module>
-      <module>microservice-order</module>
-      <module>microservice-contract</module>
+    <module>microservice-market</module>
+    <module>microservice-investor</module>
+    <module>microservice-order</module>
   </modules>
 
 

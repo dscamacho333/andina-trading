@@ -108,5 +108,5 @@ CREATE TABLE BROKER (
     
 	PRIMARY KEY (id),
     FOREIGN KEY (document_type_id) REFERENCES DOCUMENT_TYPE(id),
-     CONSTRAINT uk_broker_doctype_docnumber UNIQUE (document_type_id, document_number)
+	CONSTRAINT uk_broker_doctype_docnumber UNIQUE (document_type_id, document_number)
 );
