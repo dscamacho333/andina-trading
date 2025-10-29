@@ -1,4 +1,4 @@
-USE system_management_microservice;
+USE andina_trading;
 
 # Delete Country By Id
 UPDATE 
@@ -223,3 +223,36 @@ INNER JOIN
 	COUNTRY c ON dt.country_id = c.id
 WHERE
 	(b.is_active = True) AND (c.id = 1);
+    
+# Delete User By Id
+UPDATE
+	USERS u
+SET
+	u.account_status = 'INACTIVE'
+WHERE
+	u.user_id = 2;
+
+# Find All Users By Account Status (DEFAULT ALL)
+SELECT
+  u.user_id,
+  u.name,
+  u.email,
+  u.password_hash,
+  u.user_role,
+  u.phone,
+  u.account_status,
+  u.created_at,
+  u.last_access,
+  u.has_subscription,
+  u.alpaca_status,
+  u.alpaca_account_id,
+  u.daily_order_limit,
+  u.default_order_type,
+  u.balance,
+  u.commission_rate,
+  u.role_user,
+  u.bank_relationship_id
+FROM 
+	USERS u
+WHERE
+	u.account_status = 'ACTIVE';

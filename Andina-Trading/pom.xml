@@ -29,6 +29,7 @@
     <module>microservice-market</module>
     <module>microservice-investor</module>
     <module>microservice-order</module>
+    <module>microservice-contract</module>
   </modules>
 
 
