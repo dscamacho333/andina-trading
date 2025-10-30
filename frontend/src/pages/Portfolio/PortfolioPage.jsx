@@ -188,31 +188,6 @@ function AscendingChannelMini({
 
   return (
     <div style={{ position: "relative", width: "100%", height }}>
-      {/* Selector flotante SIN cambiar tamaño del box */}
-      <select
-        value={symbol}
-        onChange={(e) => {
-          // este onChange lo controla el padre, pero dejamos un no-op aquí por si
-          // usas el componente standalone; en esta página lo manejamos arriba
-        }}
-        style={{
-          position: "absolute",
-          top: 8,
-          right: 8,
-          zIndex: 3,
-          background: "rgba(11,11,21,.9)",
-          color: "#e5e7eb",
-          border: "1px solid #2c2f3a",
-          borderRadius: 8,
-          padding: "4px 8px",
-          fontSize: 12,
-          pointerEvents: "none" // lo desactivamos aquí; el selector real está en el padre
-        }}
-      >
-        <option value="AAPL">AAPL</option>
-        <option value="MSFT">MSFT</option>
-      </select>
-
       {option && (
         <ReactECharts
           key={chartKey}
@@ -237,17 +212,83 @@ function AscendingChannelMini({
   );
 }
 
+/* ========== Carga de símbolos del usuario ========== */
+/**
+ * Intenta, en orden:
+ *  1) GET /api/portfolio/symbols -> ["AAPL","MSFT",...]
+ *  2) GET /api/portfolio/positions -> [{symbol: "AAPL", ...}, ...]
+ *  3) GET /api/stocks -> [{symbol: "AAPL", ...}, ...]   (fallback)
+ */
+async function loadUserSymbols(baseUrl = "") {
+  const tryJson = async (path, pickSymbols) => {
+    const url = new URL(path, baseUrl || window.location.origin);
+    const r = await fetch(url.toString());
+    if (!r.ok) return null;
+    const ct = r.headers.get("content-type") || "";
+    if (!ct.includes("application/json")) return null;
+    const j = await r.json();
+    const syms = pickSymbols(j);
+    if (!Array.isArray(syms) || syms.length === 0) return null;
+    // normaliza y dedup
+    const set = new Set(syms.map(s => String(s || "").trim().toUpperCase()).filter(Boolean));
+    return Array.from(set).sort();
+  };
+
+  // 1) /api/portfolio/symbols
+  const s1 = await tryJson("/api/portfolio/symbols", j => j);
+  if (s1) return s1;
+
+  // 2) /api/portfolio/positions
+  const s2 = await tryJson("/api/portfolio/positions", j => (j || []).map(p => p.symbol));
+  if (s2) return s2;
+
+  // 3) /api/stocks (fallback)
+  const s3 = await tryJson("/api/stocks", j => (j || []).map(s => s.symbol));
+  if (s3) return s3;
+
+  return []; // nada
+}
+
 /* ================= Página ================= */
 
 const PortfolioPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Controles sin agrandar el box
-  const [symbol, setSymbol] = useState("AAPL");
+  // Símbolos del usuario (dinámicos)
+  const [symbols, setSymbols] = useState([]);
+  const [symbolsError, setSymbolsError] = useState("");
+
+  // Parámetros del gráfico
+  const [symbol, setSymbol] = useState(""); // se seteará al primer símbolo cargado
   const [timeframe] = useState("1Day");
   const [lastDays] = useState(30);
   const [feed] = useState("iex");
+  const baseUrl = ""; // proxy CRA → http://localhost:8080
 
+  // Carga la lista de símbolos del usuario
+  useEffect(() => {
+    let aborted = false;
+    (async () => {
+      try {
+        setSymbolsError("");
+        const list = await loadUserSymbols(baseUrl);
+        if (aborted) return;
+        if (!list || list.length === 0) {
+          setSymbols([]);
+          setSymbolsError("No se encontraron símbolos del usuario.");
+          return;
+        }
+        setSymbols(list);
+        // si el símbolo seleccionado no está, toma el primero
+        setSymbol(prev => (list.includes(prev) ? prev : list[0]));
+      } catch (e) {
+        if (!aborted) setSymbolsError("Error cargando símbolos del usuario.");
+      }
+    })();
+    return () => { aborted = true; };
+  }, [baseUrl]);
+
+  // Simula skeleton inicial
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
@@ -269,10 +310,11 @@ const PortfolioPage = () => {
             <h3>Historico</h3>
 
             <div style={{ position: "relative", width: "100%", height: 280 }}>
-              {/* Selector flotante real (controla el estado) */}
+              {/* Selector de símbolo (dinámico) */}
               <select
                 value={symbol}
                 onChange={(e) => setSymbol(e.target.value)}
+                disabled={!symbols.length}
                 style={{
                   position: "absolute",
                   top: 8,
@@ -286,20 +328,30 @@ const PortfolioPage = () => {
                   fontSize: 12,
                 }}
               >
-                <option value="AAPL">AAPL</option>
-                <option value="MSFT">MSFT</option>
+                {symbols.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
               </select>
 
+              {/* Mensaje si no hay símbolos */}
+              {!symbols.length && symbolsError && (
+                <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "salmon", textAlign: "center", padding: 8 }}>
+                  {symbolsError}
+                </div>
+              )}
+
               {/* El chart ocupa todo el contenedor (280px alto) */}
-              <AscendingChannelMini
-                symbol={symbol}
-                timeframe={timeframe}
-                lastDays={lastDays}
-                feed={feed}
-                baseUrl=""        // con CRA: usa el proxy "http://localhost:8080"
-                height={280}
-                pollMs={10000}    // 0 para desactivar polling
-              />
+              {symbol && (
+                <AscendingChannelMini
+                  symbol={symbol}
+                  timeframe={timeframe}
+                  lastDays={lastDays}
+                  feed={feed}
+                  baseUrl={baseUrl}   // "" usa proxy CRA
+                  height={280}
+                  pollMs={10000}      // 0 para desactivar polling
+                />
+              )}
             </div>
           </div>
 
