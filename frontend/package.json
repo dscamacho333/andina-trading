@@ -2,6 +2,7 @@
   "name": "foresttrade-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -9,6 +10,9 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.5",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.2",
+    "lightweight-charts": "^4.2.3",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-currency-input-field": "^3.10.0",
@@ -27,22 +31,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["react-app","react-app/jest"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "production": [">0.2%","not dead","not op_mini all"],
+    "development": ["last 1 chrome version","last 1 firefox version","last 1 safari version"]
   },
   "devDependencies": {
     "@babel/preset-env": "^7.27.2",
@@ -50,8 +43,6 @@
     "babel-jest": "^29.7.0"
   },
   "jest": {
-    "transformIgnorePatterns": [
-      "/node_modules/(?!(axios)/)"
-    ]
+    "transformIgnorePatterns": ["/node_modules/(?!(axios)/)"]
   }
 }
