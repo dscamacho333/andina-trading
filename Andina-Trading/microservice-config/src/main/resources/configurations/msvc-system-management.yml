@@ -14,6 +14,19 @@ spring:
       ddl-auto: validate
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: andina_trading_mongo
+      username: root
+      password: davsancamros333
+      authentication-database: admin
+
+log:
+  timezone: America/Bogota
+  shared:
+    root: C:/andina-logs
 
 eureka:
   instance:

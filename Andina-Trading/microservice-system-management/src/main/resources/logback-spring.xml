@@ -1,0 +1,54 @@
+<configuration>
+    <!-- Propiedades de Spring -->
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
+    <springProperty scope="context" name="LOG_SHARE_ROOT" source="log.shared.root" defaultValue="andina-logs"/>
+
+    <!-- <LOG_SHARE_ROOT>/<APP_NAME>/YYYY-MM-DD.log -->
+    <property name="LOG_DIR" value="${LOG_SHARE_ROOT}/${APP_NAME}"/>
+
+    <!-- ========== 1) ARCHIVO JSONL ========== -->
+    <appender name="FILE_JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/current.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>14</maxHistory>
+        </rollingPolicy>
+
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>          <!-- @timestamp -->
+                <logLevel/>           <!-- level -->
+                <loggerName/>         <!-- logger -->
+                <threadName/>         <!-- thread -->
+                <message/>            <!-- message -->
+                <stackTrace/>         <!-- stack_trace si hay excepción -->
+                <mdc/>                <!-- todo el MDC -->
+                <globalCustomFields>{"service":"${APP_NAME}"}</globalCustomFields>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!-- Asíncrono para no bloquear hilos de negocio -->
+    <appender name="ASYNC_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="FILE_JSON"/>
+        <queueSize>8192</queueSize>
+        <neverBlock>true</neverBlock>
+    </appender>
+
+    <!-- ========== 2) CONSOLA con colores (IntelliJ) ========== -->
+    <conversionRule conversionWord="clr" class="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex" class="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx" class="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%clr(%d{HH:mm:ss.SSS}){faint} %clr(%-5level) %clr([%thread]){faint} %clr(%logger{36}){cyan} - %msg%n%wEx</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root envía a ambos -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ASYNC_FILE"/>
+    </root>
+</configuration>

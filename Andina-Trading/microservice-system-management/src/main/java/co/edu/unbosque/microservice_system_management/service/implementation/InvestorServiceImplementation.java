@@ -6,11 +6,13 @@ import co.edu.unbosque.microservice_system_management.model.entity.Investor;
 import co.edu.unbosque.microservice_system_management.model.repository.InInvestorRepository;
 import co.edu.unbosque.microservice_system_management.service.interfaces.InInvestorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class InvestorServiceImplementation implements InInvestorService {
@@ -34,6 +36,8 @@ public class InvestorServiceImplementation implements InInvestorService {
                 );
         response.setRole(investor.getRoleUser());
 
+        log.info("Inversionista con ID: {} fue encontrando", investorId, response);
+
         return response;
     }
 
@@ -44,6 +48,8 @@ public class InvestorServiceImplementation implements InInvestorService {
 
         this.investorRepository
                 .deleteInvestorById(investorId);
+
+        log.info("Inversionista con ID: {} fue eliminado", investorId);
     }
 
     @Override
@@ -60,6 +66,8 @@ public class InvestorServiceImplementation implements InInvestorService {
                     return dto;
                 })
                 .toList();
+
+        log.info("Listando todos los inversionistas", response);
 
         return response;
     }
